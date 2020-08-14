@@ -8,11 +8,11 @@ namespace Meow
     {
         private MeowHash.State m_state = new MeowHash.State();
         private byte[] m_seed = MeowHash.MeowDefaultSeed;
-        private byte[] m_result = new byte[128];
 
         public MeowHashAlgorithm()
         {
             HashSizeValue = 128;
+            State = -1;
         }
 
         public byte[] Seed 
@@ -35,18 +35,24 @@ namespace Meow
 
         protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
-            MeowHash.Absorb(ref m_state, array.AsSpan().Slice(ibStart, cbSize));
+            HashCore(array.AsSpan().Slice(ibStart, cbSize));
+        }
+
+        protected override void HashCore(ReadOnlySpan<byte> source)
+        {
+            MeowHash.Absorb(ref m_state, source);
         }
 
         protected unsafe override byte[] HashFinal()
         {
-            var output = new byte[16];
             var result = MeowHash.End(ref m_state, null);
-            fixed (byte* outputPtr = output)
+
+            HashValue = new byte[16];
+            fixed (byte* outputPtr = HashValue)
             {
                 Sse2.Store(outputPtr, result);
             }
-            return output;
+            return HashValue;
         }
     }
 }
