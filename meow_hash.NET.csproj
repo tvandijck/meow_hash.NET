@@ -3,6 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Meow</RootNamespace>
+    <Version>0.5.0</Version>
+    <Authors>Tom van Dijck</Authors>
+    <Description>Port of meow_hash to .NET Core 3.1+
+https://github.com/cmuratori/meow_hash</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/tvandijck/meow_hash.NET</PackageProjectUrl>
+    <Company>mudGE Entertainment</Company>
+    <Copyright>(C) Copyright 2020 Tom van Dijck.</Copyright>
+    <RepositoryUrl>https://github.com/tvandijck/meow_hash.NET</RepositoryUrl>
+    <PackageId>meow_hash.net</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,5 +23,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
